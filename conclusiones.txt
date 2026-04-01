@@ -1,0 +1,17 @@
+Trends & Times
+Se obtuvo las siguientes métricas:  
+                        AVG         MIN         MED         MAX         P(90)       P(95)
+http_req_duration       294.66 ms   260.00 ms   282.58 ms   728.21 ms   320.24 ms   362.37 ms
+
+Después de la ejecución de las pruebas de carga se concluye lo siguiente:
+* Se obtuvo 2803 request con éxito por un lapso de 2 minutos con 40 virtual users como máximo.
+* Se obtuvo aproximadament 23.18 request por sec tras la ejecución del script
+* La tasa de error de las peticiones (http_req_failed: ['rate<0.03']) no exedió el 3%, el resultado fue 0%
+* El tiempo de respuesta de las peticiones estuvo dentro del rango máximo permitido, se obtuvo como máximo un request con 728.21 ms
+* El 90% de las peticiones tuvieron como máximo 320.23 ms como tiempo de respuesta
+* El 95% de las peticiones tuvieron como máximo 362.37 ms como tiempo de respuesta
+* Solo el 5% de las peticiones estuvieron en el rango de 362.35 ms - 728.21 ms
+
+Los resultados de las pruebas de carga son favorables para la escalabilidad del sistema, se sugiere habilitar un entorno de pruebas para evitar estresar el ambiente productivo.
+
+

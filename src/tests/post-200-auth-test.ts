@@ -1,6 +1,6 @@
 import { sleep, check } from 'k6';
 import { SharedArray } from 'k6/data';
-import { Options } from 'k6/options';
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 import http from 'k6/http';
 import Papa from 'papaparse';
 
@@ -12,9 +12,16 @@ const users = new SharedArray('user credentials', function () {
     }).data;
 });
 
-export let options:Options = {
-  vus: 50,
-  duration: '5s'
+export const options = {
+  stages: [
+    { duration: '30s', target: 40 }, 
+    { duration: '1m', target: 40 },  
+    { duration: '30s', target: 0 },  
+  ],
+  thresholds: {
+    http_req_duration: ['max<1500'],
+    http_req_failed: ['rate<0.03'],   
+  },
 };
 
 export default () => {
@@ -35,3 +42,9 @@ export default () => {
   });
   sleep(1);
 };
+
+export function handleSummary(data){
+  return {
+    "sumary.html": htmlReport(data)
+  };
+}
